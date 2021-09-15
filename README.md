@@ -1,2 +1,2 @@
-# TypeScript-Node-Project-Sructure
+# TypeScript-Node-Project-Structure
 A setup ts-node project 
