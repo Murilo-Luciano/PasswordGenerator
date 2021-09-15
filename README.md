@@ -1,5 +1,5 @@
 # TypeScript Node Project Structure
-## A setup TypeScript-node project 
+## A setup TypeScript-Node project 
 
 ### Usage
 - ```yarn install```
