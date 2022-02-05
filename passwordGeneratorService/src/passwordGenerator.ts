@@ -28,7 +28,7 @@ function passwordGenerator(
 
   function charGenerator(): string {
     const char = String.fromCharCode(
-      charCodePossibilities[getRandomOnRange(max, min)]
+      charCodePossibilities[getRandomOnRange(max, min)]!
     );
 
     return char === "\x00" ? charGenerator() : char;
@@ -36,7 +36,7 @@ function passwordGenerator(
 
   const min = Math.ceil(0);
   const max = Math.floor(
-    charCodePossibilities[charCodePossibilities.length - 1]
+    charCodePossibilities[charCodePossibilities.length - 1]!
   );
   const password = [];
   for (let i = 0; i < length; i++) {
