@@ -1,24 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { PasswordGeneratorClient } from "../proto/password_grpc_web_pb";
+import { GenPasswordRequest, Options } from "../proto/password_pb";
 
 function App() {
+  const [password, setPassword] = useState("");
+  const client = new PasswordGeneratorClient(
+    "http://" + window.location.hostname + ":8080"
+  );
+
+  const clientMessage = new GenPasswordRequest();
+
+  const onClick = () => {
+    clientMessage.setLength(10);
+
+    const options = new Options();
+    options.setHasLowercase(true);
+    options.setHasNumber(true);
+    options.setHasSymbols(true);
+    options.setHasUppercase(true);
+
+    clientMessage.setOptions(options);
+
+    client.generatePassword(clientMessage, undefined, (err, response) => {
+      if (err) console.error(err);
+      console.log(response.toObject());
+      setPassword(response.getPassword());
+    });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={onClick}>GERAR SENHA</button>
+      <h1>{password}</h1>
     </div>
   );
 }
