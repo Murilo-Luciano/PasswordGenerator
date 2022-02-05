@@ -1,4 +1,4 @@
-// source: src/proto/password.proto
+// source: proto/password.proto
 /**
  * @fileoverview
  * @enhanceable

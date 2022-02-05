@@ -1,5 +1,5 @@
 // package: 
-// file: src/proto/password.proto
+// file: proto/password.proto
 
 import * as jspb from "google-protobuf";
 

@@ -1,1 +1,1 @@
-protoc  -I="./" ./src/proto/password.proto --plugin=protoc-gen-ts="$(yarn bin)/protoc-gen-ts" --plugin=protoc-gen-grpc="$(yarn bin)/grpc_tools_node_protoc_plugin"  --js_out=import_style=commonjs:"./" --ts_out=service=grpc-node,mode=grpc-js:"./" --grpc_out=grpc_js:"./"
+protoc  -I="./" ./proto/password.proto --plugin=protoc-gen-ts="$(yarn bin)/protoc-gen-ts" --plugin=protoc-gen-grpc="$(yarn bin)/grpc_tools_node_protoc_plugin"  --js_out=import_style=commonjs:"./" --ts_out=service=grpc-node,mode=grpc-js:"./" --grpc_out=grpc_js:"./"
