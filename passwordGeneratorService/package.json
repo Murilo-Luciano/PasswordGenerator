@@ -7,7 +7,8 @@
     "build": "rimraf ./build && tsc",
     "start": "yarn run build && node build/index.js",
     "start:dev": "nodemon",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "proto": "./compile-proto.sh"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,10 @@
     "nodemon": "^2.0.12",
     "rimraf": "^3.0.2",
     "ts-node": "^10.2.1",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.3",
+    "ts-protoc-gen": "^0.14.0",
+    "grpc-tools": "^1.10.0",
+    "@grpc/grpc-js": "^1.2.2",
+    "@types/google-protobuf": "^3.7.4"
   }
 }
