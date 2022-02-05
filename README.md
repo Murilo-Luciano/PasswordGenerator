@@ -1,2 +1,3 @@
 # PasswordGenerator
+
 A PasswordGenerator website
