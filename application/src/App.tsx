@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { PasswordGeneratorClient } from "../proto/password_grpc_web_pb";
-import { GenPasswordRequest, Options } from "../proto/password_pb";
+import { PasswordGeneratorClient } from "./grpc/proto/password_grpc_web_pb";
+import { GenPasswordRequest, Options } from "./grpc/proto/password_pb";
 
 function App() {
   const [password, setPassword] = useState("");
@@ -25,7 +25,7 @@ function App() {
 
     client.generatePassword(clientMessage, undefined, (err, response) => {
       if (err) console.error(err);
-      console.log(response.toObject());
+      console.log(response?.toObject());
       setPassword(response.getPassword());
     });
   };

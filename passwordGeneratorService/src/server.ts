@@ -17,6 +17,11 @@ class PasswordGeneratorServer implements IPasswordGeneratorServer {
     options: ServerUnaryCall<GenPasswordRequest, GenPasswordResponse>,
     callback: sendUnaryData<GenPasswordResponse>
   ) {
+    console.log(
+      options.request.getLength(),
+      options.request.getOptions()?.toObject()
+    );
+
     const password = passwordGenerator(
       options.request.getLength(),
       options.request.getOptions()?.toObject()
