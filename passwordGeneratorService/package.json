@@ -16,8 +16,9 @@
   "license": "ISC",
   "dependencies": {
     "@grpc/grpc-js": "^1.2.2",
-    "grpc-tools": "^1.10.0",
     "@types/google-protobuf": "^3.7.4",
+    "dotenv": "^16.0.0",
+    "grpc-tools": "^1.10.0",
     "ts-protoc-gen": "^0.14.0"
   },
   "devDependencies": {

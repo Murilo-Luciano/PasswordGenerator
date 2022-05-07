@@ -1,16 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-import {
-  createStyles,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  makeStyles,
-  Paper,
-  Slider,
-  Switch,
-} from "@mui/material";
-import { Options } from "./grpc/proto/password_pb";
+import { FormControlLabel, FormGroup, Slider, Switch } from "@mui/material";
 import { options } from "./grpc/client";
 
 interface Props {
@@ -77,11 +67,5 @@ function OptionsContainer(props: Props) {
     </div>
   );
 }
-
-const styles: { [key: string]: React.CSSProperties } = {
-  paper: {
-    margin: 150,
-  },
-};
 
 export default OptionsContainer;

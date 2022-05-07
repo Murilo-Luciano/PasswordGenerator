@@ -23,7 +23,6 @@ function App() {
         setHasError(true);
         setTimeout(() => setHasError(false), 2000);
       }
-      console.log(response?.toObject());
       setPassword(response.getPassword());
     });
   };

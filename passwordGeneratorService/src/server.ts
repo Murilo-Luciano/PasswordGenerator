@@ -12,7 +12,8 @@ import passwordGenerator from "./passwordGenerator";
 import { PasswordGeneratorService } from "../proto/password_grpc_pb";
 import { IPasswordGeneratorServer } from "../proto/password_grpc_pb";
 import { GenPasswordRequest, GenPasswordResponse } from "../proto/password_pb";
-
+import dotenv from "dotenv";
+dotenv.config();
 class PasswordGeneratorServer implements IPasswordGeneratorServer {
   generatePassword(
     options: ServerUnaryCall<GenPasswordRequest, GenPasswordResponse>,
@@ -26,9 +27,11 @@ class PasswordGeneratorServer implements IPasswordGeneratorServer {
 
       const response = new GenPasswordResponse();
       response.setPassword(password);
+
       return callback(null, response);
     } catch (error: any) {
       console.error(error);
+
       return callback({ code: 400, message: error.message }, null);
     }
   }
@@ -40,7 +43,10 @@ const server = new Server();
 server.addService(PasswordGeneratorService, new PasswordGeneratorServer());
 const bindPromise = promisify(server.bindAsync).bind(server);
 
-bindPromise("0.0.0.0:50051", ServerCredentials.createInsecure())
+bindPromise(
+  process.env["SERVER_ADDRESS"]! || "0.0.0.0:50051",
+  ServerCredentials.createInsecure()
+)
   .then((port) => {
     console.info(`Listening on ${port}`);
     server.start();
