@@ -32,7 +32,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Box style={styles.container}>
-        <Paper elevation={5} style={styles.paper}>
+        <Paper elevation={7} style={styles.paper}>
           <h2>Password: {password}</h2>
           <OptionsContainer handleSizeChange={handlePasswordSizeChange} />
           <Button variant="contained" onClick={onClick}>
@@ -47,14 +47,18 @@ function App() {
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#5bccf6",
+      main: "#C3073F",
     },
     secondary: {
-      main: "#030e12",
+      main: "#C3073F",
     },
     background: {
-      default: "#fef9f8",
-      paper: "#fcde67",
+      default: "#343438",
+      paper: "#1A1A1D",
+    },
+    text: {
+      primary: "#FFF",
+      secondary: "#950740",
     },
   },
 });
