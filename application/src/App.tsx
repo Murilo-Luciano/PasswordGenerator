@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import "./App.css";
 import { client, clientMessage, options } from "./grpc/client";
-import { Button, Box, Paper } from "@mui/material";
+import { Button, Box, Paper, Alert, IconButton } from "@mui/material";
 import OptionsContainer from "./OptionsContainer";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Card from "@mui/material/Card";
+import Collapse from "@mui/material/Collapse";
+import CloseIcon from "@mui/icons-material/Close";
 
 function App() {
   const [password, setPassword] = useState("");
   const [passwordLength, setPasswordLength] = useState(4);
+  const [hasError, setHasError] = useState(false);
 
   const onClick = () => {
     clientMessage.setLength(passwordLength);
@@ -16,7 +18,11 @@ function App() {
     clientMessage.setOptions(options);
 
     client.generatePassword(clientMessage, undefined, (err, response) => {
-      if (err) console.error(err);
+      if (err) {
+        setPassword("");
+        setHasError(true);
+        setTimeout(() => setHasError(false), 2000);
+      }
       console.log(response?.toObject());
       setPassword(response.getPassword());
     });
@@ -33,18 +39,38 @@ function App() {
     <ThemeProvider theme={theme}>
       <Box style={styles.container}>
         <Paper elevation={12} style={styles.paper}>
+          <Collapse in={hasError}>
+            <Alert
+              variant="filled"
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setHasError(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              Error - Please try again
+            </Alert>
+          </Collapse>
           <OptionsContainer handleSizeChange={handlePasswordSizeChange} />
           <Button variant="contained" onClick={onClick}>
             generate password
           </Button>
-          {password ? (
+          <Collapse in={password ? true : false}>
             <h2>
               Password:{" "}
               <span style={{ color: theme.palette.text.secondary }}>
                 {password}
               </span>
             </h2>
-          ) : null}
+          </Collapse>
         </Paper>
       </Box>
     </ThemeProvider>
