@@ -3,6 +3,7 @@ import {
   sendUnaryData,
   Server,
   ServerCredentials,
+  ServerErrorResponse,
   ServerUnaryCall,
   UntypedHandleCall,
 } from "@grpc/grpc-js";
@@ -17,19 +18,19 @@ class PasswordGeneratorServer implements IPasswordGeneratorServer {
     options: ServerUnaryCall<GenPasswordRequest, GenPasswordResponse>,
     callback: sendUnaryData<GenPasswordResponse>
   ) {
-    console.log(
-      options.request.getLength(),
-      options.request.getOptions()?.toObject()
-    );
+    try {
+      const password = passwordGenerator(
+        options.request.getLength(),
+        options.request.getOptions()?.toObject()
+      );
 
-    const password = passwordGenerator(
-      options.request.getLength(),
-      options.request.getOptions()?.toObject()
-    );
-
-    const response = new GenPasswordResponse();
-    response.setPassword(password);
-    return callback(null, response);
+      const response = new GenPasswordResponse();
+      response.setPassword(password);
+      return callback(null, response);
+    } catch (error: any) {
+      console.error(error);
+      return callback({ code: 400, message: error.message }, null);
+    }
   }
 
   [name: string]: UntypedHandleCall;

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf ./build && tsc",
     "start": "yarn run build && node dist/server.js",
-    "start:dev": "nodemon",
+    "dev": "yarn run build && nodemon dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "proto": "./compile-proto.sh",
     "start:proxy": "docker run -d -p 8081:8081 -v \"$(pwd)\"/envoy.yaml:/etc/envoy/envoy.yaml:ro envoyproxy/envoy:v1.15.0"
