@@ -4,10 +4,10 @@ import { client, clientMessage, options } from "./grpc/client";
 import { Button, Box, Paper } from "@mui/material";
 import OptionsContainer from "./OptionsContainer";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Card from "@mui/material/Card";
 
 function App() {
   const [password, setPassword] = useState("");
-
   const [passwordLength, setPasswordLength] = useState(4);
 
   const onClick = () => {
@@ -32,12 +32,19 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Box style={styles.container}>
-        <Paper elevation={7} style={styles.paper}>
-          <h2>Password: {password}</h2>
+        <Paper elevation={12} style={styles.paper}>
           <OptionsContainer handleSizeChange={handlePasswordSizeChange} />
           <Button variant="contained" onClick={onClick}>
             generate password
           </Button>
+          {password ? (
+            <h2>
+              Password:{" "}
+              <span style={{ color: theme.palette.text.secondary }}>
+                {password}
+              </span>
+            </h2>
+          ) : null}
         </Paper>
       </Box>
     </ThemeProvider>
