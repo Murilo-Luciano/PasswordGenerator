@@ -3,3 +3,17 @@ services:
   envoy:
     build: .
     network_mode: "host"
+    container_name: proxy-envoy-container
+
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile-node
+    network_mode: "host"
+    volumes:
+      - .:/usr/app
+    container_name: password-service-container
+    command: yarn start
+    environment:
+      - SERVER_ADDRESS=0.0.0.0:50051
+    
