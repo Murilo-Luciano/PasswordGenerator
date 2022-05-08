@@ -1,3 +1,3 @@
 # PasswordGenerator
 
-A PasswordGenerator website, made with React, nodeJS and grpc
+A PasswordGenerator website, made with React, NodeJS, Grpc and Envoy proxy
