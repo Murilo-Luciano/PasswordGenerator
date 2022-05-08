@@ -1,5 +1,7 @@
 FROM envoyproxy/envoy:v1.12.2
 
-COPY ./passwordGeneratorService/envoy.yaml /etc/envoy/envoy.yaml
+COPY ./envoy.yaml /etc/envoy/envoy.yaml
+
+EXPOSE 8081
 
 CMD /usr/local/bin/envoy -c /etc/envoy/envoy.yaml
